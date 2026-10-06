@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DirectMarket – Buy and sell without a broker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="logo" id="logo">DirectMarket</a>
+    <button class="link-btn" id="switchRole" hidden>Switch role</button>
+  </header>
+
+  <main>
+    <!-- 1. ROLE SELECTION -->
+    <section id="view-home" class="view">
+      <h1>No broker in between.<br>Producers and consumers, directly.</h1>
+      <p class="lead">Producers set their own price. Consumers see it and buy at it. Choose who you are to start.</p>
+      <div class="role-grid">
+        <button class="role producer" data-role="producer">
+          <span class="role-title">I'm a producer</span>
+          <span class="role-text">I grow or make something and want to sell it at a fair price.</span>
+        </button>
+        <button class="role consumer" data-role="consumer">
+          <span class="role-title">I'm a consumer</span>
+          <span class="role-text">I want to buy straight from the people who produce it.</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. PRODUCER PAGE -->
+    <section id="view-producer" class="view" hidden>
+      <h2>Producer: list your produce</h2>
+      <div class="two-col">
+        <form id="producerForm" class="card" novalidate>
+          <label>Your name
+            <input name="name" required placeholder="e.g. Ramesh Kumar">
+          </label>
+          <label>Phone number
+            <input name="phone" type="tel" required placeholder="10-digit mobile number">
+          </label>
+          <label>Product
+            <input name="product" required placeholder="e.g. Tomato">
+          </label>
+          <div class="row">
+            <label>Total quantity
+              <input name="quantity" type="number" min="1" step="any" required placeholder="500">
+            </label>
+            <label>Unit
+              <select name="unit">
+                <option>kg</option><option>quintal</option><option>dozen</option><option>piece</option><option>litre</option>
+              </select>
+            </label>
+          </div>
+          <label>Selling price (₹ per unit)
+            <input name="price" type="number" min="0.01" step="any" required placeholder="25">
+          </label>
+          <label>Location
+            <input name="location" required placeholder="Village / town">
+          </label>
+          <p class="preview" id="producerPreview">Total value: ₹0</p>
+          <p class="error" id="producerError" role="alert"></p>
+          <button type="submit" class="primary">Publish listing</button>
+        </form>
+
+        <div>
+          <h3>Your listings</h3>
+          <div id="producerListings" class="list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CONSUMER PAGE -->
+    <section id="view-consumer" class="view" hidden>
+      <h2>Consumer: find what you need</h2>
+      <div class="two-col">
+        <form id="consumerForm" class="card" novalidate>
+          <label>Your name
+            <input name="name" required placeholder="e.g. Anita Rao">
+          </label>
+          <label>Phone number
+            <input name="phone" type="tel" required placeholder="10-digit mobile number">
+          </label>
+          <label>What do you need?
+            <input name="product" id="needProduct" required placeholder="e.g. Tomato">
+          </label>
+          <div class="row">
+            <label>Quantity needed
+              <input name="quantity" type="number" min="1" step="any" required placeholder="20">
+            </label>
+            <label>Max price (₹ per unit)
+              <input name="maxPrice" type="number" min="0.01" step="any" required placeholder="30">
+            </label>
+          </div>
+          <p class="error" id="consumerError" role="alert"></p>
+          <button type="submit" class="primary">Find matching producers</button>
+        </form>
+
+        <div>
+          <h3 id="resultsTitle">Available from producers</h3>
+          <div id="consumerListings" class="list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
